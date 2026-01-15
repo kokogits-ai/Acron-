@@ -1,0 +1,5 @@
+{
+  "name": "Acron Bank ",
+  "description": "A high-fidelity frontend banking simulator for Acron Bank, featuring secure-style login, dashboard, transaction history, and a simulated transfer flow with receipt generation.",
+  "requestFramePermissions": []
+}
