@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { AppView, TransferDetails } from './types';
-import { USER_CREDENTIALS, USER_PASSWORD, STATIC_USER } from './constants';
+import { AppView, TransferDetails, Transaction } from './types';
+import { USER_CREDENTIALS, USER_PASSWORD, STATIC_USER, STATIC_TRANSACTIONS } from './constants';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import TransferForm from './components/TransferForm';
@@ -17,6 +17,17 @@ const App: React.FC = () => {
   });
   const [currentView, setCurrentView] = useState<AppView>('dashboard');
   const [lastTransfer, setLastTransfer] = useState<TransferDetails | null>(null);
+  
+  // Transaction state with persistence
+  const [transactions, setTransactions] = useState<Transaction[]>(() => {
+    const saved = localStorage.getItem('acron_transactions');
+    return saved ? JSON.parse(saved) : STATIC_TRANSACTIONS;
+  });
+
+  // Sync transactions to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('acron_transactions', JSON.stringify(transactions));
+  }, [transactions]);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -42,6 +53,19 @@ const App: React.FC = () => {
 
   const handleTransferComplete = (details: TransferDetails) => {
     setLastTransfer(details);
+    
+    // Create new transaction object to add to history
+    const newTransaction: Transaction = {
+      id: Date.now(),
+      date: new Date().toISOString().split('T')[0],
+      description: `Transfer to ${details.recipientName}`,
+      amount: -Math.abs(details.amount),
+      type: 'debit',
+      status: 'Pending' // Matches the "Pending Authorization" state from previous requirement
+    };
+
+    // Prepend to transaction list
+    setTransactions(prev => [newTransaction, ...prev]);
     setCurrentView('receipt');
   };
 
@@ -54,6 +78,7 @@ const App: React.FC = () => {
       case 'dashboard':
         return <Dashboard 
           user={STATIC_USER} 
+          transactions={transactions}
           onAction={(view) => setCurrentView(view as AppView)} 
         />;
       case 'transfer':
@@ -62,18 +87,18 @@ const App: React.FC = () => {
           onCancel={() => setCurrentView('dashboard')} 
         />;
       case 'history':
-        return <TransactionHistoryView />;
+        return <TransactionHistoryView transactions={transactions} />;
       case 'receipt':
         return lastTransfer ? (
           <Receipt 
             details={lastTransfer} 
             onClose={() => setCurrentView('dashboard')} 
           />
-        ) : <Dashboard user={STATIC_USER} onAction={(v) => setCurrentView(v as AppView)} />;
+        ) : <Dashboard user={STATIC_USER} transactions={transactions} onAction={(v) => setCurrentView(v as AppView)} />;
       case 'profile':
         return <ProfileView user={STATIC_USER} />;
       default:
-        return <Dashboard user={STATIC_USER} onAction={(v) => setCurrentView(v as AppView)} />;
+        return <Dashboard user={STATIC_USER} transactions={transactions} onAction={(v) => setCurrentView(v as AppView)} />;
     }
   };
 

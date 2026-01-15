@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { UserProfile } from '../types';
+import { UserProfile, Transaction } from '../types';
 import { formatCurrency } from '../utils';
 import { 
   Send, 
@@ -12,16 +12,16 @@ import {
   Landmark,
   CreditCard
 } from 'lucide-react';
-import { STATIC_TRANSACTIONS } from '../constants';
 import TransactionItem from './TransactionItem';
 
 interface DashboardProps {
   user: UserProfile;
+  transactions: Transaction[];
   onAction: (view: string) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ user, onAction }) => {
-  const recentTransactions = STATIC_TRANSACTIONS.slice(0, 5);
+const Dashboard: React.FC<DashboardProps> = ({ user, transactions, onAction }) => {
+  const recentTransactions = transactions.slice(0, 5);
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -78,7 +78,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onAction }) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Transactions List */}
-        <section className="lg:col-span-2 bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+        <section className="lg:col-span-2 bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden h-fit">
           <div className="p-6 border-b border-gray-50 flex items-center justify-between">
             <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
               <TrendingUp size={20} className="text-blue-600" />
@@ -95,6 +95,9 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onAction }) => {
             {recentTransactions.map((tx) => (
               <TransactionItem key={tx.id} transaction={tx} />
             ))}
+            {recentTransactions.length === 0 && (
+              <div className="p-10 text-center text-gray-400">No recent activity</div>
+            )}
           </div>
         </section>
 

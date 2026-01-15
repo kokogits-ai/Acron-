@@ -1,13 +1,17 @@
 
 import React, { useState } from 'react';
-import { STATIC_TRANSACTIONS } from '../constants';
+import { Transaction } from '../types';
 import TransactionItem from './TransactionItem';
 import { Filter, Search, Download } from 'lucide-react';
 
-const TransactionHistoryView: React.FC = () => {
+interface TransactionHistoryViewProps {
+  transactions: Transaction[];
+}
+
+const TransactionHistoryView: React.FC<TransactionHistoryViewProps> = ({ transactions }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filtered = STATIC_TRANSACTIONS.filter(tx => 
+  const filtered = transactions.filter(tx => 
     tx.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 

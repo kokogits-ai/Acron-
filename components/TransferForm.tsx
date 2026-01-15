@@ -56,7 +56,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
     setStep('processing');
     setTimeout(() => {
       setStep('pin');
-    }, 2500); // 2-3 second delay as requested
+    }, 2500);
   };
 
   const handlePinSubmit = (e: React.FormEvent) => {
@@ -83,22 +83,22 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
 
   if (step === 'processing') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in zoom-in duration-300">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in zoom-in duration-300 px-4 text-center">
         <Loader2 size={48} className="text-blue-600 animate-spin mb-6" />
         <h2 className="text-2xl font-bold text-gray-900">Processing transaction...</h2>
-        <p className="text-gray-500 mt-2">Communicating with global SEPA/SWIFT gateway</p>
+        <p className="text-gray-500 mt-2">Connecting to SWIFT authorization gateway</p>
       </div>
     );
   }
 
   if (step === 'pin') {
     return (
-      <div className="max-w-md mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="max-w-md mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 px-4">
         <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl text-center">
           <div className="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
             <Lock size={32} />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Enter Secure PIN</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Secure Payment PIN</h2>
           <p className="text-gray-500 mb-8">Confirm this {transferType} transfer by entering your 4-digit PIN code.</p>
           
           <form onSubmit={handlePinSubmit} className="space-y-6">
@@ -137,7 +137,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
               disabled={pin.length < 4}
               className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-bold py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2"
             >
-              Verify & Complete Transfer
+              Authorize Transfer
               <ArrowRight size={20} />
             </button>
           </form>
@@ -147,7 +147,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
   }
 
   return (
-    <div className="max-w-2xl mx-auto animate-in fade-in duration-500">
+    <div className="max-w-2xl mx-auto animate-in fade-in duration-500 px-4">
       <button 
         onClick={onCancel}
         className="flex items-center gap-2 text-gray-500 hover:text-gray-800 font-medium mb-6 transition-colors"
@@ -166,7 +166,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
           {/* Transfer Type Selector */}
           <div className="space-y-3">
             <label className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Transfer Destination</label>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <button
                 type="button"
                 onClick={() => handleTypeChange('EU')}
@@ -227,7 +227,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
             </div>
 
             {transferType === 'EU' ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
                     <CreditCard size={16} className="text-blue-500" />
@@ -239,15 +239,6 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
                     placeholder="FIXX XXXX XXXX XXXX XX"
                     value={formData.recipientIban}
                     onChange={e => setFormData({ ...formData, recipientIban: e.target.value.toUpperCase() })}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-700">BIC / SWIFT (Optional)</label>
-                  <input
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-600 outline-none uppercase font-mono"
-                    placeholder="XXXXXXXX"
-                    value={formData.bicSwift}
-                    onChange={e => setFormData({ ...formData, bicSwift: e.target.value.toUpperCase() })}
                   />
                 </div>
               </div>

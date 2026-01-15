@@ -3,7 +3,7 @@ import React from 'react';
 import { TransferDetails } from '../types';
 import { STATIC_USER } from '../constants';
 import { formatCurrency, formatDate } from '../utils';
-import { CheckCircle, Printer, Share2, Landmark, X, Globe, Flag } from 'lucide-react';
+import { Clock, Printer, Share2, Landmark, X, Globe, Flag, AlertCircle } from 'lucide-react';
 
 interface ReceiptProps {
   details: TransferDetails;
@@ -36,17 +36,21 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
       </div>
 
       <div className="bg-white border border-gray-100 shadow-2xl rounded-[1.5rem] md:rounded-[2rem] overflow-hidden animate-in zoom-in duration-500 origin-top">
-        {/* Success Header */}
-        <div className="bg-emerald-500 text-white p-6 md:p-10 text-center no-print relative overflow-hidden">
+        {/* Pending Header */}
+        <div className="bg-amber-500 text-white p-6 md:p-10 text-center no-print relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 flex items-center justify-center">
              {details.transferType === 'EU' ? <Globe size={200} /> : <Flag size={200} />}
           </div>
           <div className="relative z-10">
             <div className="bg-white/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-white/50">
-              <CheckCircle size={32} className="md:w-10 md:h-10" />
+              <Clock size={32} className="md:w-10 md:h-10 animate-pulse" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold">Transfer Successful</h2>
-            <p className="text-emerald-50 text-xs md:text-sm mt-1">Ref: {details.reference}</p>
+            <h2 className="text-2xl md:text-3xl font-bold">Transaction Pending</h2>
+            <p className="text-amber-50 text-xs md:text-sm mt-1 font-medium flex items-center justify-center gap-2">
+              <AlertCircle size={14} />
+              Waiting for SWIFT authorization
+            </p>
+            <p className="text-amber-100/60 text-[10px] mt-2">Ref: {details.reference}</p>
           </div>
         </div>
 
@@ -57,7 +61,7 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
              <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Acron Bank</h1>
            </div>
            <div className="text-right">
-             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Official Transaction Receipt</p>
+             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Transaction Status Report</p>
              <p className="text-sm font-semibold text-gray-900">{formatDate(details.date)}</p>
            </div>
         </div>
@@ -69,8 +73,9 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
             <div className="text-3xl md:text-5xl font-bold text-gray-900">
               {formatCurrency(details.amount)}
             </div>
-            <div className="mt-2 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
-              Completed
+            <div className="mt-2 bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+              <Clock size={10} />
+              Pending Authorization
             </div>
           </div>
 
@@ -103,12 +108,6 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
                     <p className="text-xs text-gray-500">IBAN</p>
                     <p className="font-mono text-xs md:text-sm font-semibold text-gray-700">{details.recipientIban}</p>
                   </div>
-                  {details.bicSwift && (
-                    <div>
-                      <p className="text-xs text-gray-500">BIC / SWIFT</p>
-                      <p className="font-mono text-xs md:text-sm font-semibold text-gray-700">{details.bicSwift}</p>
-                    </div>
-                  )}
                 </>
               ) : (
                 <>
@@ -145,6 +144,11 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
           </div>
 
           <div className="mt-8 pt-8 border-t border-gray-100 text-center">
+             <div className="bg-slate-50 p-4 rounded-xl border border-gray-100 mb-6">
+                <p className="text-[11px] text-gray-600 font-medium leading-relaxed">
+                  Notice: Your transaction is being processed through the SWIFT international network. Verification of funds can take up to 24-48 business hours. You will receive an email once the authorization is complete.
+                </p>
+             </div>
              <div className="inline-block p-4 border border-dashed border-gray-200 rounded-xl mb-4">
                 <Landmark size={24} className="text-gray-300 mx-auto" />
              </div>
@@ -152,7 +156,7 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
                Secured by Acron Bank Finland
              </p>
              <p className="text-[8px] md:text-[10px] text-gray-300 mt-1 italic">
-               This document serves as an official confirmation of transfer. Member of European Deposit Guarantee Scheme.
+               This document serves as an official confirmation of a pending transfer.
              </p>
           </div>
         </div>
