@@ -27,14 +27,14 @@ type Step = 'form' | 'processing' | 'pin';
 const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => {
   const [step, setStep] = useState<Step>('form');
   const [pin, setPin] = useState('');
-  const [transferType, setTransferType] = useState<TransferType>('EU');
+  const [transferType, setTransferType] = useState<TransferType>('US'); // Default to US for Jason
   const [formData, setFormData] = useState({
     recipientName: '',
     recipientIban: '',
     bicSwift: '',
     accountNumber: '',
     routingNumber: '',
-    bankName: EU_BANKS[0],
+    bankName: US_BANKS[0],
     amount: '',
     description: ''
   });
@@ -86,7 +86,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
       <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in zoom-in duration-300 px-4 text-center">
         <Loader2 size={48} className="text-blue-600 animate-spin mb-6" />
         <h2 className="text-2xl font-bold text-gray-900">Processing transaction...</h2>
-        <p className="text-gray-500 mt-2">Connecting to SWIFT authorization gateway</p>
+        <p className="text-gray-500 mt-2">Connecting to Federal Reserve authorization gateway</p>
       </div>
     );
   }
@@ -163,22 +163,9 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
         </div>
 
         <div className="p-8 space-y-8">
-          {/* Transfer Type Selector */}
           <div className="space-y-3">
             <label className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Transfer Destination</label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <button
-                type="button"
-                onClick={() => handleTypeChange('EU')}
-                className={`flex items-center justify-center gap-3 p-4 rounded-2xl border-2 transition-all font-bold ${
-                  transferType === 'EU' 
-                    ? 'border-blue-600 bg-blue-50 text-blue-700' 
-                    : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
-                }`}
-              >
-                <Globe size={20} />
-                International / EU
-              </button>
               <button
                 type="button"
                 onClick={() => handleTypeChange('US')}
@@ -190,6 +177,18 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
               >
                 <Flag size={20} />
                 US Domestic
+              </button>
+              <button
+                type="button"
+                onClick={() => handleTypeChange('EU')}
+                className={`flex items-center justify-center gap-3 p-4 rounded-2xl border-2 transition-all font-bold ${
+                  transferType === 'EU' 
+                    ? 'border-blue-600 bg-blue-50 text-blue-700' 
+                    : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
+                }`}
+              >
+                <Globe size={20} />
+                International / EU
               </button>
             </div>
           </div>
@@ -236,7 +235,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
                   <input
                     required
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-600 outline-none uppercase font-mono"
-                    placeholder="FIXX XXXX XXXX XXXX XX"
+                    placeholder="EUXX XXXX XXXX XXXX XX"
                     value={formData.recipientIban}
                     onChange={e => setFormData({ ...formData, recipientIban: e.target.value.toUpperCase() })}
                   />
@@ -258,7 +257,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-700">Routing Number</label>
+                  <label className="text-sm font-semibold text-gray-700">Routing Number (ABA)</label>
                   <input
                     required
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-600 outline-none font-mono"
@@ -272,9 +271,9 @@ const TransferForm: React.FC<TransferFormProps> = ({ onComplete, onCancel }) => 
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-700">Amount (EUR)</label>
+                <label className="text-sm font-semibold text-gray-700">Amount (USD)</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">€</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">$</span>
                   <input
                     required
                     type="number"

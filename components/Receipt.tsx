@@ -48,7 +48,7 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
             <h2 className="text-2xl md:text-3xl font-bold">Transaction Pending</h2>
             <p className="text-amber-50 text-xs md:text-sm mt-1 font-medium flex items-center justify-center gap-2">
               <AlertCircle size={14} />
-              Waiting for SWIFT authorization
+              Waiting for network authorization
             </p>
             <p className="text-amber-100/60 text-[10px] mt-2">Ref: {details.reference}</p>
           </div>
@@ -131,7 +131,7 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
             </div>
             <div className="flex justify-between items-center text-xs md:text-sm">
               <span className="text-gray-500">Transfer Type</span>
-              <span className="font-bold text-blue-600">{details.transferType === 'EU' ? 'International / SEPA' : 'US Domestic (ACH)'}</span>
+              <span className="font-bold text-blue-600">{details.transferType === 'EU' ? 'International / SEPA' : 'US Domestic (FedWire)'}</span>
             </div>
             <div className="flex justify-between items-center text-xs md:text-sm">
               <span className="text-gray-500">Transaction Date</span>
@@ -146,14 +146,14 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
           <div className="mt-8 pt-8 border-t border-gray-100 text-center">
              <div className="bg-slate-50 p-4 rounded-xl border border-gray-100 mb-6">
                 <p className="text-[11px] text-gray-600 font-medium leading-relaxed">
-                  Notice: Your transaction is being processed through the SWIFT international network. Verification of funds can take up to 24-48 business hours. You will receive an email once the authorization is complete.
+                  Notice: Your transaction is being processed through the standard banking network. Verification of funds can take up to 24 business hours. You will receive an email once the authorization is complete.
                 </p>
              </div>
              <div className="inline-block p-4 border border-dashed border-gray-200 rounded-xl mb-4">
                 <Landmark size={24} className="text-gray-300 mx-auto" />
              </div>
              <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold">
-               Secured by Acron Bank Finland
+               Secured by Acron Bank USA
              </p>
              <p className="text-[8px] md:text-[10px] text-gray-300 mt-1 italic">
                This document serves as an official confirmation of a pending transfer.

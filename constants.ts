@@ -1,46 +1,40 @@
 
 import { Transaction, UserProfile } from './types';
 
-export const USER_CREDENTIALS = "FI74-9845-2210-6631";
-export const USER_PASSWORD = "matti1974";
+export const USER_CREDENTIALS = "US98-1234-5678-9012";
+export const USER_PASSWORD = "Jason1972";
 
 export const STATIC_USER: UserProfile = {
-  accountNumber: "FI74-9845-2210-6631",
-  firstName: "Matti",
-  surname: "Kajupank",
-  email: "kajupankmatti@gmail.com",
-  age: 74,
-  currency: "EUR",
-  country: "Finland",
-  balance: 7100000.00
+  accountNumber: "US98-1234-5678-9012",
+  firstName: "Jason",
+  surname: "Owens",
+  email: "drjasonowens997@gmail.com",
+  age: 53,
+  currency: "USD",
+  country: "USA",
+  balance: 1250000.00
 };
 
 export const STATIC_TRANSACTIONS: Transaction[] = [
-  { id: 1, date: "2025-01-18", description: "Rental Property Income – Helsinki Apartment", amount: 12500.00, type: "credit", status: "Completed" },
-  { id: 2, date: "2025-01-12", description: "Bank Transfer to Jukka Lehtinen", amount: -8500.00, type: "debit", status: "Completed" },
-  { id: 3, date: "2025-01-05", description: "Uber Ride – Helsinki City", amount: -42.60, type: "debit", status: "Completed" },
-  { id: 4, date: "2024-12-22", description: "Rental Property Income – Espoo Residence", amount: 10400.00, type: "credit", status: "Completed" },
-  { id: 5, date: "2024-12-10", description: "Transfer to Anna Korhonen", amount: -15000.00, type: "debit", status: "Completed" },
-  { id: 6, date: "2024-11-28", description: "Rental Property Income – Turku Apartment", amount: 9800.00, type: "credit", status: "Completed" },
-  { id: 7, date: "2024-11-14", description: "Uber Eats – Helsinki", amount: -36.20, type: "debit", status: "Completed" },
-  { id: 8, date: "2024-10-30", description: "Rental Property Income – Helsinki Apartment", amount: 12000.00, type: "credit", status: "Completed" },
-  { id: 9, date: "2024-10-18", description: "International Transfer to Lars Nyström", amount: -22000.00, type: "debit", status: "Completed" },
-  { id: 10, date: "2024-09-25", description: "Rental Property Income – Espoo Residence", amount: 10150.00, type: "credit", status: "Completed" },
-  { id: 11, date: "2024-09-02", description: "Uber Ride – Airport Transfer", amount: -58.90, type: "debit", status: "Completed" },
-  { id: 12, date: "2024-08-20", description: "Rental Property Income – Turku Apartment", amount: 11000.00, type: "credit", status: "Completed" },
-  { id: 13, date: "2024-07-15", description: "Transfer to Mika Salonen", amount: -17500.00, type: "debit", status: "Completed" },
-  { id: 14, date: "2024-06-28", description: "Rental Property Income – Helsinki Apartment", amount: 10000.00, type: "credit", status: "Completed" },
-  { id: 15, date: "2024-05-10", description: "Uber Ride – Helsinki", amount: -31.75, type: "debit", status: "Completed" }
+  { id: 1, date: "2025-02-10", description: "Medical Consulting Fee - Jersey Shore Medical", amount: 15200.00, type: "credit", status: "Completed" },
+  { id: 2, date: "2025-02-08", description: "Whole Foods Market - Wall Township", amount: -432.50, type: "debit", status: "Completed" },
+  { id: 3, date: "2025-02-01", description: "Monthly Dividend - Vanguard S&P 500", amount: 2850.75, type: "credit", status: "Completed" },
+  { id: 4, date: "2025-01-25", description: "Apple Store - Short Hills Mall", amount: -3499.00, type: "debit", status: "Completed" },
+  { id: 5, date: "2025-01-20", description: "Quarterly Property Tax - Monmouth County", amount: -8400.00, type: "debit", status: "Completed" },
+  { id: 6, date: "2025-01-15", description: "Delta Airlines - JFK to London", amount: -4200.00, type: "debit", status: "Completed" },
+  { id: 7, date: "2025-01-10", description: "Stripe Payout - Telemedicine Services", amount: 8900.00, type: "credit", status: "Completed" },
+  { id: 8, date: "2024-12-28", description: "Ritz-Carlton Residences - Maintenance", amount: -1500.00, type: "debit", status: "Completed" },
+  { id: 9, date: "2024-12-15", description: "Annual Performance Bonus", amount: 45000.00, type: "credit", status: "Completed" },
+  { id: 10, date: "2024-12-05", description: "Tesla Supercharging - Edison, NJ", amount: -32.40, type: "debit", status: "Completed" }
 ];
 
 export const EU_BANKS = [
-  "Nordea Bank",
-  "Danske Bank",
-  "SEB",
-  "OP Financial Group",
   "Deutsche Bank",
-  "Barclays",
-  "BNP Paribas"
+  "HSBC",
+  "BNP Paribas",
+  "Société Générale",
+  "Santander",
+  "UBS"
 ];
 
 export const US_BANKS = [
@@ -48,6 +42,7 @@ export const US_BANKS = [
   "Bank of America",
   "Wells Fargo",
   "Citibank",
-  "US Bank",
-  "Capital One"
+  "Goldman Sachs",
+  "Morgan Stanley",
+  "TD Bank"
 ];

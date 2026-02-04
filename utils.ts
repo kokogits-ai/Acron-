@@ -1,6 +1,6 @@
 
-export const formatCurrency = (amount: number, currency: string = 'EUR') => {
-  return new Intl.NumberFormat('fi-FI', {
+export const formatCurrency = (amount: number, currency: string = 'USD') => {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: currency,
     minimumFractionDigits: 2
@@ -12,7 +12,7 @@ export const generateReference = () => {
 };
 
 export const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString('fi-FI', {
+  return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'

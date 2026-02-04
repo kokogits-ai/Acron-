@@ -19,11 +19,11 @@ const ProfileView: React.FC<ProfileViewProps> = ({ user }) => {
             <h2 className="text-3xl font-bold text-gray-900">{user.firstName} {user.surname}</h2>
             <BadgeCheck size={24} className="text-blue-500" />
           </div>
-          <p className="text-gray-500 font-medium mb-4">Acron Private Banking Customer since 2012</p>
+          <p className="text-gray-500 font-medium mb-4">Acron Private Banking Wealth Management since 2018</p>
           <div className="flex flex-wrap justify-center md:justify-start gap-3">
-             <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Premier Elite</span>
-             <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">verified id</span>
-             <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">tax resident: FI</span>
+             <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Private Client</span>
+             <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">SSN Verified</span>
+             <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Tax Resident: US-NJ</span>
           </div>
         </div>
       </div>
@@ -32,28 +32,28 @@ const ProfileView: React.FC<ProfileViewProps> = ({ user }) => {
         <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
           <h3 className="font-bold text-xl text-gray-900 flex items-center gap-2">
             <User size={24} className="text-blue-500" />
-            Personal Details
+            Account Details
           </h3>
           <div className="space-y-4">
              <ProfileItem icon={Fingerprint} label="Account ID" value={user.accountNumber} mono />
              <ProfileItem icon={Calendar} label="Age" value={`${user.age} Years`} />
              <ProfileItem icon={Globe} label="Citizenship" value={user.country} />
-             <ProfileItem icon={MapPin} label="Region" value="Uusimaa, Finland" />
+             <ProfileItem icon={MapPin} label="Region" value="New Jersey, USA" />
           </div>
         </div>
 
         <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
           <h3 className="font-bold text-xl text-gray-900 flex items-center gap-2">
             <Mail size={24} className="text-blue-500" />
-            Contact & Security
+            Contact & Preferences
           </h3>
           <div className="space-y-4">
              <ProfileItem icon={Mail} label="Email Address" value={user.email} />
-             <ProfileItem icon={Phone} label="Verified Phone" value="+358 40 XXX XXXX" />
-             <ProfileItem icon={Globe} label="Portal Language" value="Finnish / English" />
+             <ProfileItem icon={Phone} label="Verified Phone" value="+1 (201) XXX-XXXX" />
+             <ProfileItem icon={Globe} label="Preferred Language" value="English (US)" />
              <div className="pt-4 border-t border-gray-50">
                <button className="text-sm font-bold text-blue-600 hover:text-blue-700 underline underline-offset-4">
-                 Update personal information
+                 Edit communication settings
                </button>
              </div>
           </div>
