@@ -12,7 +12,7 @@ export const STATIC_USER: UserProfile = {
   age: 53,
   currency: "USD",
   country: "USA",
-  balance: 1250000.00
+  balance: 700000.00
 };
 
 export const STATIC_TRANSACTIONS: Transaction[] = [
