@@ -14,15 +14,23 @@ export interface Transaction {
 export interface UserProfile {
   accountNumber: string;
   firstName: string;
-  surname: string;
+  lastName: string;
   email: string;
   age: number;
   currency: string;
   country: string;
   balance: number;
+  // US specific
+  state?: string;
+  city?: string;
+  zipCode?: string;
+  phone?: string;
+  accountType?: string;
+  routingNumber?: string;
+  address?: string;
 }
 
-export type TransferType = 'EU' | 'US';
+export type TransferType = 'ACH' | 'Wire' | 'Internal';
 
 export interface TransferDetails {
   transferType: TransferType;
@@ -32,11 +40,7 @@ export interface TransferDetails {
   description: string;
   date: string;
   reference: string;
-  // EU specific
-  recipientIban?: string;
-  bicSwift?: string;
-  // US specific
-  accountNumber?: string;
+  accountNumber: string;
   routingNumber?: string;
 }
 

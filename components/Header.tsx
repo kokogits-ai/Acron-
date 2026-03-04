@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ user, currentView, setView, onLogout })
             className="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-1.5 rounded-xl transition-colors group"
           >
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-bold text-gray-900 leading-none">{user.firstName}</p>
+              <p className="text-sm font-bold text-gray-900 leading-none">{user.firstName} {user.lastName}</p>
               <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-0.5">Premier Account</p>
             </div>
             <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700 font-bold group-hover:scale-105 transition-transform">

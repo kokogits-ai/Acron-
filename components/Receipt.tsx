@@ -39,7 +39,7 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
         {/* Pending Header */}
         <div className="bg-amber-500 text-white p-6 md:p-10 text-center no-print relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 flex items-center justify-center">
-             {details.transferType === 'EU' ? <Globe size={200} /> : <Flag size={200} />}
+             <Flag size={200} />
           </div>
           <div className="relative z-10">
             <div className="bg-white/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-white/50">
@@ -84,7 +84,7 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 pb-2">Sender Details</p>
               <div>
                 <p className="text-xs text-gray-500">Name</p>
-                <p className="font-bold text-gray-900">{STATIC_USER.firstName} {STATIC_USER.surname}</p>
+                <p className="font-bold text-gray-900">{STATIC_USER.firstName} {STATIC_USER.lastName}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-500">From Account</p>
@@ -102,11 +102,11 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
                 <p className="text-xs text-gray-500">Bank Name</p>
                 <p className="font-bold text-gray-900">{details.bankName}</p>
               </div>
-              {details.transferType === 'EU' ? (
+              {details.transferType === 'Internal' ? (
                 <>
                   <div>
-                    <p className="text-xs text-gray-500">IBAN</p>
-                    <p className="font-mono text-xs md:text-sm font-semibold text-gray-700">{details.recipientIban}</p>
+                    <p className="text-xs text-gray-500">Account Number</p>
+                    <p className="font-mono text-xs md:text-sm font-semibold text-gray-700">{details.accountNumber}</p>
                   </div>
                 </>
               ) : (
@@ -131,7 +131,7 @@ const Receipt: React.FC<ReceiptProps> = ({ details, onClose }) => {
             </div>
             <div className="flex justify-between items-center text-xs md:text-sm">
               <span className="text-gray-500">Transfer Type</span>
-              <span className="font-bold text-blue-600">{details.transferType === 'EU' ? 'International / SEPA' : 'US Domestic (FedWire)'}</span>
+              <span className="font-bold text-blue-600">{details.transferType} Transfer</span>
             </div>
             <div className="flex justify-between items-center text-xs md:text-sm">
               <span className="text-gray-500">Transaction Date</span>

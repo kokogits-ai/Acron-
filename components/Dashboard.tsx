@@ -33,8 +33,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user, transactions, onAction }) =
         <div className="relative z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
-              <p className="text-blue-100 text-sm font-medium uppercase tracking-widest mb-1">Savings Account</p>
-              <h2 className="text-2xl md:text-3xl font-bold">{user.firstName} {user.surname}</h2>
+              <p className="text-blue-100 text-sm font-medium uppercase tracking-widest mb-1">Checking Account</p>
+              <h2 className="text-2xl md:text-3xl font-bold">{user.firstName} {user.lastName}</h2>
               <div className="flex items-center gap-2 mt-1 text-blue-100 font-mono text-sm">
                 <span>{user.accountNumber}</span>
                 <span className="bg-white/20 px-2 py-0.5 rounded text-[10px]">{user.country}</span>
@@ -121,7 +121,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, transactions, onAction }) =
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-800">Account Protected</p>
-                  <p className="text-xs text-gray-500">Member of Finland's deposit guarantee scheme.</p>
+                  <p className="text-xs text-gray-500">Member FDIC. Deposits insured up to $250,000.</p>
                 </div>
               </div>
             </div>
